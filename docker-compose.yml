@@ -5,11 +5,10 @@ services:
       context: .
       dockerfile: docker/wordpress/Dockerfile
       target: development
+    container_name: wp_airflow
     volumes:
       - ./bedrock:/var/www/html
-    depends_on:
-      mysql:
-        condition: service_healthy
+    # Note: depends_on for mysql moved to docker-compose.override.yml for local dev
     environment:
       - HOST_UID=${HOST_UID:-1000}
       - HOST_GID=${HOST_GID:-1000}
@@ -26,14 +25,14 @@ services:
     labels:
       - "traefik.enable=true"
       # HTTP Router (redirects to HTTPS via Traefik global config)
-      - "traefik.http.routers.ciwg-roots-sage-wordpress.rule=Host(`${DOMAIN:-ciwg-roots-sage.localhost}`)"
-      - "traefik.http.routers.ciwg-roots-sage-wordpress.entrypoints=web"
+      - "traefik.http.routers.wp_airflow.rule=Host(`${DOMAIN:-airflow.localhost}`)"
+      - "traefik.http.routers.wp_airflow.entrypoints=web"
       # HTTPS Router
-      - "traefik.http.routers.ciwg-roots-sage-wordpress-secure.rule=Host(`${DOMAIN:-ciwg-roots-sage.localhost}`)"
-      - "traefik.http.routers.ciwg-roots-sage-wordpress-secure.entrypoints=websecure"
-      - "traefik.http.routers.ciwg-roots-sage-wordpress-secure.tls=true"
+      - "traefik.http.routers.wp_airflow-secure.rule=Host(`${DOMAIN:-airflow.localhost}`)"
+      - "traefik.http.routers.wp_airflow-secure.entrypoints=websecure"
+      - "traefik.http.routers.wp_airflow-secure.tls=true"
       # Service Configuration
-      - "traefik.http.services.ciwg-roots-sage-wordpress.loadbalancer.server.port=80"
+      - "traefik.http.services.wp_airflow.loadbalancer.server.port=80"
       - "traefik.docker.network=web"
 
   # MySQL Database
@@ -61,6 +60,7 @@ services:
     build:
       context: .
       dockerfile: docker/node/Dockerfile
+      target: development
     volumes:
       - ./bedrock/web/app/themes/sage:/app
       - /app/node_modules

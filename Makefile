@@ -72,14 +72,34 @@ npm-dev: ## Start Vite dev server
 # Production Commands
 # =============================================================================
 
+prod-build-assets: ## Build production assets (runs node builder)
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile build run --rm node
+
 prod-build: ## Build production images
 	docker compose -f docker-compose.yml -f docker-compose.prod.yml build
+
+prod-build-full: prod-build-assets prod-build ## Build assets and images for production
 
 prod-up: ## Start production environment
 	docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 prod-down: ## Stop production environment
 	docker compose -f docker-compose.yml -f docker-compose.prod.yml down
+
+prod-restart: ## Restart production environment
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml restart
+
+prod-logs: ## View production logs
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml logs -f
+
+prod-status: ## Check production container health
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml ps
+
+prod-deploy: prod-build-full prod-up ## Full production deployment (build + start)
+	@echo "Waiting for services to be healthy..."
+	@sleep 10
+	@docker compose -f docker-compose.yml -f docker-compose.prod.yml ps
+	@echo "Production deployment complete!"
 
 # =============================================================================
 # Setup & Utilities
