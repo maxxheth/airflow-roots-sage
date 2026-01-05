@@ -42,9 +42,14 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     cors: true,
+    https: {
+      cert: '/app/certs/airflow.crt',
+      key: '/app/certs/airflow.key',
+    },
     hmr: {
-      host: 'localhost',
+      host: 'airflow-roots-sage.local',
       port: 5173,  // External Docker port mapping
+      protocol: 'wss',
     },
   },
 })

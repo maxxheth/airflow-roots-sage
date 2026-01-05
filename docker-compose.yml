@@ -1,4 +1,36 @@
 services:
+  # Traefik Reverse Proxy
+  traefik:
+    image: traefik:v3.6
+    container_name: traefik_airflow
+    command:
+      # API and Dashboard
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      # Docker Provider
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=airflow-roots-sage_web"
+      # Entrypoints
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      # Logging
+      - "--log.level=DEBUG"
+      # Dynamic Configuration
+      - "--providers.file.directory=/etc/traefik/conf.d"
+      - "--providers.file.watch=true"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./docker/traefik/dynamic_conf.yml:/etc/traefik/conf.d/ssl.yml:ro
+      - ./docker/traefik/certs:/etc/traefik/certs:ro
+    networks:
+      - web
+    restart: unless-stopped
+
   # WordPress (PHP-FPM + Nginx)
   wordpress:
     build:
@@ -33,7 +65,7 @@ services:
       - "traefik.http.routers.wp_airflow-secure.tls=true"
       # Service Configuration
       - "traefik.http.services.wp_airflow.loadbalancer.server.port=80"
-      - "traefik.docker.network=web"
+      - "traefik.docker.network=airflow-roots-sage_web"
 
   # MySQL Database
   mysql:
@@ -64,6 +96,7 @@ services:
     volumes:
       - ./bedrock/web/app/themes/sage:/app
       - /app/node_modules
+      - ./docker/traefik/certs:/app/certs:ro
     ports:
       - "5173:5173"
     command: npm run dev -- --host 0.0.0.0
@@ -72,7 +105,7 @@ services:
 
 networks:
   web:
-    external: true
+    driver: bridge
   internal:
     driver: bridge
 

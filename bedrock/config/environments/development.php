@@ -20,3 +20,13 @@ ini_set('display_errors', '1');
 
 // Enable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', false);
+
+/**
+ * SSL Configuration for Development
+ * Allows using self-signed (snake oil) certificates without SSL verification errors
+ */
+if (env('WP_HOME') && strpos(env('WP_HOME'), 'https') === 0) {
+    // Force SSL for admin
+    Config::define('FORCE_SSL_ADMIN', true);
+
+}
