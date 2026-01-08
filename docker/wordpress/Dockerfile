@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
 	supervisor \
 	curl \
 	less \
+	default-mysql-client \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
 	libpng-dev \
