@@ -1,4 +1,4 @@
-@import "tailwindcss" theme(static);
+@import "tailwindcss";
 @source "../views/";
 @source "../../app/";
 
@@ -21,3 +21,58 @@
 header a {
 	text-decoration: none;
 } */
+
+/* Custom animations */
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeSlideIn {
+	0% {
+		opacity: 0;
+		transform: translateY(30px);
+		filter: blur(8px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+		filter: blur(0px);
+	}
+}
+
+/* Custom utilities */
+.animate-fade-in-up {
+	animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.4s ease-in;
+}
+
+/* Scroll animation control */
+.animate-on-scroll {
+	animation-play-state: paused !important;
+}
+
+.animate-on-scroll.animate {
+	animation-play-state: running !important;
+}
