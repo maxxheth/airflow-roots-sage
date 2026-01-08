@@ -1,23 +1,19 @@
-<article @php(post_class('h-entry'))>
+<article @php(post_class('animate-on-scroll animate-fade-in'))>
   <header>
-    <h1 class="p-name">
+    <h1 class="entry-title">
       {!! $title !!}
     </h1>
 
     @include('partials.entry-meta')
   </header>
 
-  <div class="e-content">
+  <div class="entry-content">
     @php(the_content())
   </div>
 
-  @if ($pagination())
-    <footer>
-      <nav class="page-nav" aria-label="Page">
-        {!! $pagination !!}
-      </nav>
-    </footer>
-  @endif
+  <footer>
+    {!! wp_link_pages(['echo' => 0, 'before' => '<nav class="page-nav"><p>' . __('Pages:', 'sage'), 'after' => '</p></nav>']) !!}
+  </footer>
 
   @php(comments_template())
 </article>
