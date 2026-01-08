@@ -293,7 +293,7 @@
                 <div class="flex items-center gap-6 text-sm text-neutral-600 flex-wrap justify-center">
                     <a href="https://www.ciwebgroup.com" target="_blank" class="flex items-center gap-2 hover:opacity-80 transition">
                         <span class="font-geist mr-4">Designed & Developed by</span>
-                        <img src="/media/imgs/ciwg-logo.png" alt="CI Web Group" class="h-12 w-auto"> 
+                        <img src="{!! Vite::asset('resources/images/ciwg-logo.png') !!}" alt="CI Web Group" class="h-12 w-auto"> 
                     </a>
                     <a href="#privacy" class="hover:text-neutral-900 transition font-geist">Privacy Policy</a>
                     <a href="#terms" class="hover:text-neutral-900 transition font-geist">Terms of Service</a>
