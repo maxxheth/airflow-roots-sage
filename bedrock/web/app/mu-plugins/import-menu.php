@@ -10,6 +10,10 @@ namespace App\Commands;
 
 use WP_CLI;
 
+if (!defined('WP_CLI') || !WP_CLI) {
+    return;
+}
+
 class ImportMenu
 {
     /**
@@ -24,14 +28,14 @@ class ImportMenu
     public function __invoke($args, $assoc_args)
     {
         $menu_file = get_theme_file_path('resources/data/menu-primary_navigation.json');
-        
+
         if (!file_exists($menu_file)) {
             WP_CLI::error("Menu file not found: {$menu_file}");
             return;
         }
 
         $menu_data = json_decode(file_get_contents($menu_file), true);
-        
+
         if (!$menu_data) {
             WP_CLI::error("Failed to parse menu JSON");
             return;
@@ -40,14 +44,14 @@ class ImportMenu
         // Create or get the menu
         $menu_name = 'Primary Navigation';
         $menu_exists = wp_get_nav_menu_object($menu_name);
-        
+
         if ($menu_exists) {
             WP_CLI::warning("Menu '{$menu_name}' already exists. Deleting and recreating...");
             wp_delete_nav_menu($menu_exists->term_id);
         }
 
         $menu_id = wp_create_nav_menu($menu_name);
-        
+
         if (is_wp_error($menu_id)) {
             WP_CLI::error("Failed to create menu: " . $menu_id->get_error_message());
             return;
@@ -89,7 +93,7 @@ class ImportMenu
             // Extract slug from URL
             $url = $item['original_url'] ?? $item['url'];
             $slug = trim(parse_url($url, PHP_URL_PATH), '/');
-            
+
             $page = get_page_by_path($slug);
             if ($page) {
                 $item_data['menu-item-object-id'] = $page->ID;
