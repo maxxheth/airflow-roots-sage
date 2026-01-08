@@ -5,25 +5,25 @@
 @extends('layouts.app')
 
 @section('content')
-  @while(have_posts()) @php(the_post())
+  @while(have_posts()) @php the_post() @endphp
     <section class="sm:px-8 max-w-7xl mr-auto ml-auto pr-6 pb-16 pl-6 pt-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div class="max-w-xl">
-                <div class="flex gap-3 mb-6 items-center">
+                <div class="flex gap-3 mb-6 items-center [animation:fadeSlideIn_1s_ease-out_0.1s_both] animate-on-scroll">
                     <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium font-geist" style="background: rgba(6, 182, 212, 0.1); color: rgb(6, 182, 212);">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg>
                         {{ $hero->badge }}
                     </div>
                 </div>
 
-                <h1 class="sm:text-5xl lg:text-[56px] leading-[1.05] text-4xl font-bold tracking-tight font-geist mb-6 uppercase" style="color: rgb(0, 57, 118);">
+                <h1 class="sm:text-5xl lg:text-[56px] leading-[1.05] [animation:fadeSlideIn_1s_ease-out_0.2s_both] animate-on-scroll text-4xl font-bold tracking-tight font-geist mb-6 uppercase" style="color: rgb(0, 57, 118);">
                     {{ $hero->title }}
                     <span class="block mt-2" style="color: rgb(6, 182, 212);">{{ $hero->subtitle }}</span>
                 </h1>
 
-                <p class="sm:text-lg leading-relaxed text-base text-neutral-600 mb-8 font-geist">{{ $hero->description }}</p>
+                <p class="sm:text-lg leading-relaxed text-base text-neutral-600 mb-8 [animation:fadeSlideIn_1s_ease-out_0.3s_both] animate-on-scroll font-geist">{{ $hero->description }}</p>
 
-                <div class="flex flex-col sm:flex-row sm:items-stretch gap-4 mb-12">
+                <div class="flex flex-col sm:flex-row sm:items-stretch gap-4 [animation:fadeSlideIn_1s_ease-out_0.4s_both] animate-on-scroll mb-12">
                     <a href="#contact" class="group inline-flex items-center transition-colors sm:w-auto justify-center font-medium text-white w-full rounded-full py-3 pr-3 pl-6 shadow-lg" style="background: #14A850;">
                         <span class="font-geist">Schedule Testing</span>
                         <span class="ml-3 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white/20 ring-1 ring-white/30">
@@ -37,9 +37,9 @@
                 </div>
             </div>
 
-            <div class="relative">
+            <div class="relative [animation:fadeSlideIn_1s_ease-out_0.3s_both] animate-on-scroll">
                 <div class="overflow-hidden rounded-[28px] relative shadow-2xl ring-1 ring-black/5">
-                    <img src="{{ get_template_directory_uri() }}/public/images/indoor-air-quality.jpeg" alt="Indoor Air Quality Testing" class="w-full h-[500px] sm:h-[600px] object-cover">
+                    <img src="{!! Vite::asset('resources/images/indoor-air-quality.jpeg') !!}" alt="Indoor Air Quality Testing" class="w-full h-[500px] sm:h-[600px] object-cover">
                 </div>
             </div>
         </div>

@@ -50,7 +50,7 @@
       {{-- Right: Image --}}
       <div class="relative [animation:fadeSlideIn_1s_ease-out_0.3s_both] animate-on-scroll">
         <div class="overflow-hidden rounded-[28px] relative shadow-2xl ring-1 ring-black/5">
-          <img src="/media/imgs/happy-family-at-home.jpeg" alt="Happy family inside the home enjoying their air" class="sm:h-[600px] w-full h-[500px] object-cover">
+          <img src="{!! Vite::asset('resources/images/happy-family-at-home.jpeg') !!}" alt="Happy family inside the home enjoying their air" class="sm:h-[600px] w-full h-[500px] object-cover">
           <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-6 shadow-xl">
             <div class="grid grid-cols-3 gap-4">
               <div>

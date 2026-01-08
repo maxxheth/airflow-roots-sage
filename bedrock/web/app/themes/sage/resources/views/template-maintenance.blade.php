@@ -5,19 +5,19 @@
 @extends('layouts.app')
 
 @section('content')
-  @while(have_posts()) @php(the_post())
+  @while(have_posts()) @php the_post() @endphp
     <section class="sm:px-8 max-w-7xl mr-auto ml-auto pr-6 pb-16 pl-6 pt-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div class="max-w-xl">
-                <h1 class="sm:text-5xl lg:text-[56px] leading-[1.05] text-4xl font-bold tracking-tight font-geist mb-6 uppercase" style="color: rgb(0, 57, 118);">
+                <h1 class="sm:text-5xl lg:text-[56px] leading-[1.05] [animation:fadeSlideIn_1s_ease-out_0.1s_both] animate-on-scroll text-4xl font-bold tracking-tight font-geist mb-6 uppercase" style="color: rgb(0, 57, 118);">
                     PROTECT YOUR INVESTMENT WITH REGULAR HVAC MAINTENANCE
                 </h1>
 
-                <p class="sm:text-lg leading-relaxed text-base text-neutral-600 mb-8 font-geist">
+                <p class="sm:text-lg leading-relaxed text-base text-neutral-600 mb-8 [animation:fadeSlideIn_1s_ease-out_0.2s_both] animate-on-scroll font-geist">
                     Keep your heating and cooling system running efficiently year-round. Our comprehensive maintenance program ensures peak performance, lower energy bills, and extended equipment life.
                 </p>
 
-                <div class="flex flex-col sm:flex-row sm:items-stretch gap-4 mb-12">
+                <div class="flex flex-col sm:flex-row sm:items-stretch gap-4 [animation:fadeSlideIn_1s_ease-out_0.3s_both] animate-on-scroll mb-12">
                     <a href="#contact" class="group inline-flex items-center transition-colors sm:w-auto justify-center font-medium text-white w-full rounded-full py-3 pr-3 pl-6 shadow-lg" style="background: #14A850;">
                         <span class="font-geist">Join Our Program</span>
                         <span class="ml-3 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white/20 ring-1 ring-white/30">
@@ -31,15 +31,15 @@
                 </div>
             </div>
 
-            <div class="relative">
+            <div class="relative [animation:fadeSlideIn_1s_ease-out_0.2s_both] animate-on-scroll">
                 <div class="overflow-hidden rounded-[28px] relative shadow-2xl ring-1 ring-black/5">
-                    <img src="{{ get_template_directory_uri() }}/public/images/maintenance.jpeg" alt="HVAC Maintenance" class="w-full h-[500px] sm:h-[600px] object-cover">
+                    <img src="{!! Vite::asset('resources/images/maintenance.jpeg') !!}" alt="HVAC Maintenance" class="w-full h-[500px] sm:h-[600px] object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="sm:p-8 bg-white max-w-7xl border-black/5 border rounded-3xl mt-20 mr-auto mb-20 ml-auto pt-12 pr-6 pb-12 pl-6">
+    <section class="sm:p-8 bg-white max-w-7xl border-black/5 border [animation:fadeSlideIn_1s_ease-out_0.1s_both] animate-on-scroll rounded-3xl mt-20 mr-auto mb-20 ml-auto pt-12 pr-6 pb-12 pl-6">
         <h2 class="sm:text-4xl lg:text-5xl leading-[1.05] text-3xl font-bold tracking-tight font-geist mb-6 text-center uppercase" style="color: rgb(0, 57, 118);">
             {{ $heading }}
         </h2>
