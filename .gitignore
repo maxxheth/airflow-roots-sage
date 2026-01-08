@@ -4,10 +4,11 @@
 .env.*.local
 
 # Dependencies
-/bedrock/vendor/
-/bedrock/web/wp/
-/bedrock/web/app/themes/sage/node_modules/
-/bedrock/web/app/themes/sage/public/build/
+bedrock/vendor/
+bedrock/web/wp/
+bedrock/web/app/themes/sage/node_modules/
+bedrock/web/app/themes/sage/public/build/
+bedrock/web/app/themes/sage/resources/images/
 
 # Uploads (optional - uncomment to ignore)
 # /bedrock/web/app/uploads/
